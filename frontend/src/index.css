@@ -1,0 +1,4 @@
+/* Add globally to avoid padding overflows */
+* {
+  box-sizing: border-box;
+}

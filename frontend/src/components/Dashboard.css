@@ -1,0 +1,153 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f7f9fb;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard {
+  width: 40%;
+  margin: 40px auto;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  font-family: "Ancizar Sans", sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.logout-btn {
+  padding: 8px 16px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #d32f2f;
+}
+
+.form-card {
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 32px;
+  border: 1px solid #ddd;
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.product-form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.product-form button {
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.product-form button:hover {
+  background: #0056b3;
+}
+
+.form-btn {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.add-btn,
+.clear-btn {
+  width: 50%;
+}
+
+/* Product List Container */
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Each Product Item */
+.product-item {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+/* .product-item:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+} */
+
+/* Product Info */
+.product-item a {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.product-item a:hover {
+  text-decoration: underline;
+}
+
+.product-item p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Actions (Edit/Delete Buttons) */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.actions button:hover {
+  opacity: 0.9;
+}
