@@ -1,1 +1,18 @@
-
+services:
+  - type: web
+    name: price-tracker-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    env: python
+    plan: free
+    region: oregon
+    branch: main # Or your default Git branch
+    repo: https://github.com/gurudattpuranik25/AI-Price-Tracker/tree/master/backend
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: DL1B7rh8w8JQKZ7rQsBoQ6CzObc62I3A
+        value: your-secret-key
+      - key: MONGO_URI
+        value: mongodb+srv://guruhp999:Nc8v6TTnZdelV9tl@cluster0.dvaujmk.mongodb.net/price_tracker?retryWrites=true&w=majority&appName=Cluster0
