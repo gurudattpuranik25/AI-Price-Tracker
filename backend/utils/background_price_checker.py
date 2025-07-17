@@ -16,14 +16,70 @@ def get_price(url):
         try:
             page.goto(url, timeout=60000)
             if "flipkart.com" in url:
+                # title = page.wait_for_selector("span.VU-ZEz").text_content()
+                # price_text = page.wait_for_selector("div.Nx9bqj.CxhGGd").text_content()
+                # price = int(price_text.replace("₹", "").replace(",", "").strip())
+
+                page.wait_for_selector("span.VU-ZEz", timeout=15000)
+                page.wait_for_selector("div.Nx9bqj.CxhGGd", timeout=15000)
+                
                 title = page.locator("span.VU-ZEz").text_content()
                 price_text = page.locator("div.Nx9bqj.CxhGGd").text_content()
                 price = int(price_text.replace("₹", "").replace(",", "").strip())
                 # image = page.locator("img#landingImage.a-dynamic-image.a-stretch-vertical").get_attribute("src")
             elif "amazon." in url:
-                title = page.locator("#productTitle.a-size-large.product-title-word-break").text_content().strip()
-                price_text = page.locator("span.a-price-whole").first.text_content().strip()
-                price = int(price_text.replace("₹", "").replace(",", "").replace(".", ""))
+                page.set_extra_http_headers({
+                    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+                    "accept-language": "en-US,en;q=0.9",
+                })
+
+                page.goto(url, timeout=60000, wait_until="domcontentloaded")
+                page.wait_for_timeout(3000)
+
+                if "Enter the characters you see below" in page.content():
+                    print("🛑 Amazon bot protection triggered.")
+                    return None, None
+
+                try:
+                    # Product title (ID selector only)
+                    title = page.locator("span#productTitle").text_content().strip()
+
+                    # Use a-offscreen inside a-price — more reliable than a-price-whole
+                    price_locators = page.locator("span.a-price > span.a-offscreen")
+                    price_texts = price_locators.all_text_contents()
+
+                    # Pick the first valid price
+                    price = None
+                    for price_text in price_texts:
+                        if "₹" in price_text:
+                            price = int(price_text.replace("₹", "").replace(",", "").split(".")[0].strip())
+                            break
+
+                    if price is None:
+                        print("⚠️ No valid price found.")
+                        return title, None
+
+                    return title, price
+
+                except Exception as e:
+                    print("❌ Error parsing Amazon page:", e)
+                    return None, None
+
+
+            # elif "amazon." in url:
+            #     # title = page.wait_for_selector("span#productTitle.a-size-large.product-title-word-break").text_content().strip()
+            #     # price_text = page.wait_for_selector("span.a-price-whole").first.text_content().strip()
+            #     # price = int(price_text.replace("₹", "").replace(",", "").replace(".", ""))
+
+            #     page.wait_for_selector("span#productTitle.a-size-large.product-title-word-break", timeout=15000)
+            #     title_element = page.locator("span#productTitle.a-size-large.product-title-word-break")
+            #     title = title_element.text_content().strip() if title_element else "Title not found"
+
+            #     # Use a more robust selector for the price that works across product variations
+            #     page.wait_for_selector("span.a-price-whole", timeout=15000)
+            #     price_text = page.locator("span.a-price-whole").first.text_content().strip()
+            #     price = int(price_text.replace("₹", "").replace(",", "").replace(".", ""))
+
                 # image = page.locator("img.DByuf4.IZexXJ.jLEJ7H").get_attribute("src")
             else:
                 title = None
