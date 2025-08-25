@@ -1,4 +1,4 @@
-# Use official Playwright image with Python
+# Use official Playwright image (Python + Chromium preinstalled)
 FROM mcr.microsoft.com/playwright/python:v1.48.0-jammy
 
 # Set working directory
@@ -11,8 +11,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy all backend files
 COPY . .
 
-# Expose port (Flask/FastAPI usually runs on 8000)
+# Expose port 8000 (Flask)
 EXPOSE 8000
 
-# Start backend
-CMD ["python", "app.py"]
+# Run Flask app
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "app:create_app()"]
+
