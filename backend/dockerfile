@@ -1,0 +1,18 @@
+# Use official Playwright image with Python
+FROM mcr.microsoft.com/playwright/python:v1.48.0-jammy
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements and install
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy all backend files
+COPY . .
+
+# Expose port (Flask/FastAPI usually runs on 8000)
+EXPOSE 8000
+
+# Start backend
+CMD ["python", "app.py"]
