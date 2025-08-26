@@ -16,7 +16,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "http://ai-price-tracker-production.up.railway.app/api/auth/login",
         form,
         {
           withCredentials: true,

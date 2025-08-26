@@ -13,9 +13,13 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/auth/register", form, {
-        withCredentials: true,
-      });
+      await axios.post(
+        "http://ai-price-tracker-production.up.railway.app/api/auth/register",
+        form,
+        {
+          withCredentials: true,
+        }
+      );
       navigate("/login");
     } catch (error) {
       console.log(error.response?.data.error);

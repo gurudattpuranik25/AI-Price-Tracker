@@ -26,9 +26,12 @@ const Dashboard = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/products/all", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        "http://ai-price-tracker-production.up.railway.app/api/products/all",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setProducts(res.data);
     } catch (err) {
       console.error("Failed to fetch products", err);
@@ -45,7 +48,7 @@ const Dashboard = () => {
       setIsProductsLoading(false);
       if (editProductId) {
         await axios.put(
-          `http://localhost:5000/api/products/${editProductId}`,
+          `http://ai-price-tracker-production.up.railway.app/api/products/${editProductId}`,
           form,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -54,9 +57,13 @@ const Dashboard = () => {
         setEditProductId(null);
         notify("Product details updated successfully!", "success");
       } else {
-        await axios.post("http://localhost:5000/api/products/add", form, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axios.post(
+          "http://ai-price-tracker-production.up.railway.app/api/products/add",
+          form,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         notify("Product added successfully!", "success");
       }
       setIsProductsLoading(true);
@@ -81,9 +88,12 @@ const Dashboard = () => {
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/products/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `http://ai-price-tracker-production.up.railway.app/api/products/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       notify("Product deleted successfully!", "success");
       fetchProducts();
     } catch (err) {

@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-INTERVAL = int(os.environ.get("PRICE_CHECK_INTERVAL", 10))  # default: 1 hour
+INTERVAL = int(os.environ.get("PRICE_CHECK_INTERVAL", 300))  # default: 1 hour
 
 
 def get_price(url):
